@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { createWorker } from 'tesseract.js';
 import Cam from './components/Cam';
 import './App.css';
@@ -53,24 +53,23 @@ function App() {
     logger: m => console.log(m),
   });
 
-  const doOCR = async () => {
+  const doOCR = async (img) => {
+    setOcr('Processando imagem...');
     await worker.load();
     await worker.loadLanguage('por');
     await worker.initialize('por');
-    const { data: { text } } = await worker.recognize('./rotulo.png');
+    const { data: { text } } = await worker.recognize(img);
     console.table(matchAPLVWords(text));
     setOcr(text);
   };
 
-  const [ocr, setOcr] = useState('Processando imagem...');
-  // useEffect(() => {
-  //   doOCR();
-  // }, []);
+  const [ocr, setOcr] = useState('');
 
   return (
     <div className="App">
      <div className="video-container">
-       <Cam className="player" />
+      <p className="stats">{ocr}</p>
+      <Cam className="player" onDraw={doOCR} onClear={()=> {setOcr('')}}/>
      </div>
     </div>
   );

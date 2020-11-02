@@ -13,6 +13,16 @@
   background-color: rgb(45, 48, 53);
 }
 
+.stats {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #FFF;
+  z-index: 3;
+  font-size: 2rem;
+}
+
 .player {
   object-fit: cover;
   width: 100vw;
@@ -20,4 +30,39 @@
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.btn-capture {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 3px solid #FFF;
+  border-radius: 50%;
+  height: auto;
+  width: auto;
+  font-size: 2rem;
+  text-align: center;
+  padding: 10px;
+  background-color: transparent;
+  color: #FFF;
+}
+
+.btn-capture > span {
+  display: none;
+}
+
+.btn-capture>span.icon {
+  display: inline-block;
+  margin: 5px;
+}
+
+@media (min-width: 767px) {
+  .btn-capture {
+    border-radius: 6px;
+  }
+
+  .btn-capture > span {
+    display: inline-block;
+  }
 }
