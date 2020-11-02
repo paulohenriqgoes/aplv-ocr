@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createWorker } from 'tesseract.js';
+import Cam from './components/Cam';
 import './App.css';
 
 const APL_LIST = [
@@ -30,8 +31,8 @@ const APL_LIST = [
   'Proteína de leite hidrolisada',
   'Whey protein',
   'Fermento lácteo',
-  'Gordura de manteiga', 
-  'óleo de manteiga', 
+  'Gordura de manteiga',
+  'óleo de manteiga',
   'éster de manteiga',
   'Composto lácteo',
   'mistura láctea'
@@ -51,7 +52,7 @@ function App() {
   const worker = createWorker({
     logger: m => console.log(m),
   });
-  
+
   const doOCR = async () => {
     await worker.load();
     await worker.loadLanguage('por');
@@ -62,17 +63,15 @@ function App() {
   };
 
   const [ocr, setOcr] = useState('Processando imagem...');
-  useEffect(() => {
-    doOCR();
-  });
-  
+  // useEffect(() => {
+  //   doOCR();
+  // }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          {ocr}
-        </p>
-      </header>
+     <div className="video-container">
+       <Cam className="player" />
+     </div>
     </div>
   );
 }
